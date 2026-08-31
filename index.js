@@ -2,8 +2,7 @@
 import express from "express"; // import express using ES6 module syntax
 
 const app = express();
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // traditional function declaration
 // function helloWorld(req, res) {
