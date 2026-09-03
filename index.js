@@ -1,5 +1,6 @@
 // const express = require("express"); // import express but old technique
 import express from "express"; // import express using ES6 module syntax
+import connectDB from "./config/database.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -12,6 +13,8 @@ const PORT = process.env.PORT;
 // const helloWorldArrow = (req, res) => {
 //   res.send("Hello, World!");
 // };
+
+connectDB(); // Call the function to establish database connection
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
