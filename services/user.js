@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import { NotFoundError } from "../errors/not-found.js";
 
 export const create = async (data) => {
   const user = await User.create(data);
@@ -13,9 +14,7 @@ export const index = async () => {
 
 export const show = async (id) => {
   const user = await User.findById(id, { password: 0 });
-  if (!user) {
-    throw new Error("User not found");
-  }
+  if (!user) throw new NotFoundError("User not found");
   return user;
 };
 
@@ -26,9 +25,7 @@ export const update = async (id, data) => {
     projection: { password: 0 },
   });
 
-  if (!user) {
-    throw new Error("User not found");
-  }
+  if (!user) throw new NotFoundError("User not found");
 
   return user;
 };
@@ -38,9 +35,7 @@ export const remove = async (id) => {
     projection: { password: 0 },
   });
 
-  if (!user) {
-    throw new Error("User not found");
-  }
+  if (!user) throw new NotFoundError("User not found");
 
   return user;
 };
