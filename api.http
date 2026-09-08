@@ -1,4 +1,5 @@
 @baseUrl=http://localhost:3000
+@userId=6a9e73ef2c72958a93079674
 
 ### create user
 POST {{baseUrl}}/users
@@ -9,3 +10,21 @@ Content-Type: application/json
   "email": "john.doe4@example.com",
   "password": "user@123"
 }
+
+### get all users
+GET {{baseUrl}}/users
+
+### get user by id
+GET {{baseUrl}}/users/{{userId}}
+
+### update user by id
+PATCH {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+
+{
+  "name": "John Doe Updated",
+  "email": "john.doe.updated@example.com"
+}
+
+### delete user by id
+DELETE {{baseUrl}}/users/{{userId}}
