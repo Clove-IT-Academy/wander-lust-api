@@ -3,48 +3,48 @@ import { create, index, show, update, remove } from "../services/user.js";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const user = await create(req.body);
     res.status(201).json(user);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const users = await index();
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const user = await show(req.params.id);
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", async (req, res, next) => {
   try {
     const user = await update(req.params.id, req.body);
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const user = await remove(req.params.id);
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 

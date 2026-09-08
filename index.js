@@ -2,6 +2,7 @@
 import express from "express"; // import express using ES6 module syntax
 import connectDB from "./config/database.js";
 import handlers from "./handlers/index.js";
+import errorMiddleware from "./middlewares/error.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json()); // Middleware to parse JSON request bodies
 app.use("/", handlers);
+app.use(errorMiddleware); // Middleware to handle errors
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
