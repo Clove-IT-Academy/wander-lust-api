@@ -3,6 +3,7 @@ import express from "express"; // import express using ES6 module syntax
 import connectDB from "./config/database.js";
 import handlers from "./handlers/index.js";
 import errorMiddleware from "./middlewares/error.js";
+import { authMiddleware } from "./middlewares/auth.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use(express.json()); // Middleware to parse JSON request bodies
 app.use("/", handlers);
 app.use(errorMiddleware); // Middleware to handle errors
+app.use(authMiddleware); //Middleware to check login status of user
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
