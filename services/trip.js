@@ -1,5 +1,8 @@
+import { generateAccessToken } from "../config/jwt";
+import { ConflictError } from "../errors/conflict";
 import { NotFoundError } from "../errors/not-found";
 import Trip from "../models/trip"
+import sendMail from "../utils/sendMail";
 
 
 export const create = async (data)=>{
@@ -40,4 +43,34 @@ export const findOne = async (id, userId)=>{
     }
 
     return trip;
+}
+
+export const invite = async (id, userId, collaboratorsEmails)=>{
+    const trip = await findOne(id, userId);
+
+    if( !trip ){
+        throw new NotFoundError("Trip not found or you do not have access");
+    }
+
+    const check = trip.collaborators.some((c)=>{
+        collaboratorsEmails.includes(c)
+    })
+
+    if(check){
+        throw new ConflictError("Collaborator already invited");
+    }
+
+    const token = await generateAccessToken({tripId: id}, "1h");
+
+    const link = `${process.env.FRONTEND_URL}/trips/${id}/invite/accept?token=${token}`;
+
+    await sendMail(collaboratorsEmails.join(","), "Invitation to join Trip", {
+        link: link,
+        title: trip.title,
+        startDate: trip.startDate.toDateString(),
+        endDate: trip.endDate.toDateString(),
+        name: trip.user.name
+    })
+
+    return { message: "Invitation sent successfully"}
 }
