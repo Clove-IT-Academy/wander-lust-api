@@ -1,4 +1,4 @@
-import { generateAccessToken } from "../config/jwt";
+import { generateAccessToken, verifyAccessToken } from "../config/jwt";
 import { ConflictError } from "../errors/conflict";
 import { NotFoundError } from "../errors/not-found";
 import Trip from "../models/trip"
@@ -73,4 +73,25 @@ export const invite = async (id, userId, collaboratorsEmails)=>{
     })
 
     return { message: "Invitation sent successfully"}
+}
+
+export const accept = async (token, userId) => {
+  const tripId = verifyAccessToken(token);
+  const trip = await Trip.findOne({ _id: tripId }).populate(
+    "collaborators"
+  );
+
+  if (!trip) throw new NotFoundError("Trip not found");
+  if (
+    trip.collaborators.some(
+      (collaborator) => collaborator._id.toString() === userId.toString()
+    )
+  ) {
+    throw new ConflictError("User already a collaborator");
+  }
+
+  trip.collaborators.push(userId);
+  await trip.save();
+
+  return { message: "Invitation accepted successfully" };
 }

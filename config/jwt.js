@@ -12,5 +12,5 @@ export const generateAccessToken = async (
 export const verifyAccessToken = async (token)=>{
     const decodedToken = await jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-    return decodedToken.userId;
+    return decodedToken.userId || decodedToken.tripId;
 }
