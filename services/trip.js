@@ -1,8 +1,8 @@
-import { generateAccessToken, verifyAccessToken } from "../config/jwt";
-import { ConflictError } from "../errors/conflict";
-import { NotFoundError } from "../errors/not-found";
-import Trip from "../models/trip"
-import sendMail from "../utils/sendMail";
+import { generateAccessToken, verifyAccessToken } from "../config/jwt.js";
+import { ConflictError } from "../errors/conflict.js";
+import { NotFoundError } from "../errors/not-found.js";
+import Trip from "../models/trip.js"
+import sendMail from "../utils/sendMail.js";
 
 
 export const create = async (data)=>{

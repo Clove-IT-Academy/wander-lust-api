@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createTripValidator, updateTripValidator } from "../validators/trip";
-import { accept, create, findOne, index, invite, remove, update } from "../services/trip";
+import { createTripValidator, updateTripValidator } from "../validators/trip.js";
+import { accept, create, findOne, index, invite, remove, update } from "../services/trip.js";
 
 const router = Router();
 

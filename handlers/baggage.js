@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createBaggageValidator, updateBaggageValidator } from "../validators/baggage";
-import { create, findOne, index, remove, update } from "../services/baggage";
+import { createBaggageValidator, updateBaggageValidator } from "../validators/baggage.js";
+import { create, findOne, index, remove, update } from "../services/baggage.js";
 
 const router = Router();
 

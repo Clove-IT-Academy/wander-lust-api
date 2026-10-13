@@ -4,6 +4,7 @@ import connectDB from "./config/database.js";
 import handlers from "./handlers/index.js";
 import errorMiddleware from "./middlewares/error.js";
 import { authMiddleware } from "./middlewares/auth.js";
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT;
@@ -24,6 +25,14 @@ app.get("/", (req, res) => {
 }); // using arrow function as a callback
 
 app.use(express.json()); // Middleware to parse JSON request bodies
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
+
 app.use("/", handlers);
 app.use(errorMiddleware); // Middleware to handle errors
 app.use(authMiddleware); //Middleware to check login status of user

@@ -1,5 +1,5 @@
-import { body } from "express-validator";
-import { validate } from "./validate";
+import { body } from "express-validator.js";
+import { validate } from "./validate.js";
 
 export const createBaggageValidator = [
     body("name")

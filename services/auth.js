@@ -1,8 +1,8 @@
 import { compare } from "bcrypt";
-import { generateAccessToken } from "../config/jwt";
-import User from "../models/user";
-import { create } from "./user"
-import { UnauthorizedError } from "../errors/unauthorized";
+import { generateAccessToken } from "../config/jwt.js";
+import User from "../models/user.js";
+import { create } from "./user.js"
+import { UnauthorizedError } from "../errors/unauthorized.js";
 
 export const register = async (data)=>{
     const user = await create(data);

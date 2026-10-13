@@ -1,6 +1,6 @@
 import { body } from "express-validator";
-import { ValidationError } from "../errors/validation";
-import { validate } from "./validate";
+import { ValidationError } from "../errors/validation.js";
+import { validate } from "./validate.js";
 
 
 export const createTripValidator = [

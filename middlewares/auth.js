@@ -1,4 +1,4 @@
-import { verifyAccessToken } from "../config/jwt";
+import { verifyAccessToken } from "../config/jwt.js";
 
 const publicRoutes = ["/auth/register", "/auth/login"];
 
