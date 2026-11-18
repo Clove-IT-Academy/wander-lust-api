@@ -37,6 +37,10 @@ const tripSchema = new Schema({
         required: true, 
         trim: true
     },
+    description: {
+        type: String,
+        trim: true
+    },
     startDate: {
         type: Date,
         required: true,

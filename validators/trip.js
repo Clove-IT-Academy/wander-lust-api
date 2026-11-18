@@ -11,6 +11,12 @@ export const createTripValidator = [
         .withMessage("Title must be at least 4 characters long")
         .trim()
         .escape(),
+    body("description")
+        .optional()
+        .isLength({min: 20})
+        .withMessage("Description must be at least 20 characters long")
+        .trim()
+        .escape(),
     body("startDate")
         .notEmpty()
         .withMessage("Start date is required")

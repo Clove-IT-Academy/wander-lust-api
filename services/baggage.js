@@ -1,5 +1,5 @@
-import { NotFoundError } from "../errors/not-found";
-import Baggage from "../models/baggage";
+import { NotFoundError } from "../errors/not-found.js";
+import Baggage from "../models/baggage.js";
 
 export const create = async (data)=>{
     const baggage = await Baggage.create(data);
