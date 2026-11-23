@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/", createTripValidator, async (req, res, next) => {
   try {
+    console.log(req.user);
     const trip = await create({...req.body, user: req.user});
     res.status(201).json(trip);
   } catch (error) {
