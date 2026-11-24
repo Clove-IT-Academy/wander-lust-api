@@ -33,9 +33,9 @@ app.use(cors({
 }));
 
 
+app.use(authMiddleware); //Middleware to check login status of user
 app.use("/", handlers);
 app.use(errorMiddleware); // Middleware to handle errors
-app.use(authMiddleware); //Middleware to check login status of user
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
